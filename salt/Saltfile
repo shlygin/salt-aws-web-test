@@ -1,0 +1,14 @@
+salt-ssh:
+  roster: scan
+  ssh_user: centos
+  ssh_sudo: True
+  ssh_max_procs: 2
+  ignore_host_keys: True
+  ssh_wipe: True
+  config_dir: .
+  extra_filerefs:
+    - salt://nginx/map.jinja
+    - salt://nginx/files/_name.conf
+    - salt://nginx/files/_ssl.conf
+    - salt://nginx/files/_auth.conf
+    - salt://nginx/files/_access_policy.conf

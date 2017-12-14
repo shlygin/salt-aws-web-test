@@ -1,0 +1,12 @@
+auto_accept: True
+hash_type: sha256
+state_verbose: False
+state_output: mixed
+
+root_dir: ./salt-root
+file_roots:
+  base:
+    - ./salt
+pillar_roots:
+  base:
+    - ./pillar

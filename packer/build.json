@@ -1,0 +1,40 @@
+{
+  "variables": {
+    "access": "",
+    "secret": "",
+    "region": "us-east-1",
+    "profile": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{ user `access` }}",
+      "secret_key": "{{ user `secret` }}",
+      "region": "{{ user `region` }}",
+      "profile": "{{ user `profile` }}",
+      "source_ami_filter": {
+        "filters": {
+          "owner-alias": "aws-marketplace",
+          "virtualization-type": "hvm",
+          "product-code": "aw0evgkw8e5c1q413zgy5pjce",
+          "root-device-type": "ebs"
+        },
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ssh_username": "centos",
+      "ssh_port": 22,
+      "ssh_timeout": "120s",
+      "ami_name": "centos-7-zfree {{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "{{.Vars}} sudo -E -S bash -c '{{.Path}} centos'",
+      "scripts": [
+        "scripts/init.sh"
+      ]
+    }
+  ]
+}
